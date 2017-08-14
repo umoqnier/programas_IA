@@ -10,6 +10,8 @@
 #	Juárez Pascual Karla Vanessa
 # Hecho en Python 3.3
 import os
+import math
+
 def cls():					# Funcion para limpiar pantalla en cualquier S.O.
 	if os.name == 'ce' or 'nt' or 'dos':
 		os.system("cls")
@@ -18,15 +20,16 @@ def cls():					# Funcion para limpiar pantalla en cualquier S.O.
 
 def creaVector():
 	#dim = int(input("Ingresa de que dimension sera el vector -->\t"))
-	v = input("Ingrese las componentes del vector separadas por un espacio\n-->\t")
+	v = input("\nIngrese las componentes del vector separadas por un espacio\n-->\t")
 	v = v.split(" ")
-	vector = list(map(lambda n:int(n), v))
+	vector = list(map(lambda n: float(n), v))
 	
 	#print(vector)
 	#print(type(vector))
 	return vector
 
 def suma():
+	print("\n========= SUMA =========\n")
 	num = int(input("Ingrese cuantos vectores desea sumar -->\t"))
 	vectores = []
 	total = []
@@ -42,12 +45,44 @@ def suma():
 				total[m] += j
 				m += 1
 		jump = False 
-	#total = list(map(lambda n: n + n, vectores))
-	print(total)
+	print("\n\t El resultado de la suma es: " + str(total))
+
+def resta():
+	print("\n========= RESTA =========\n")
+	num = int(input("Ingrese cuantos vectores desea restar -->\t"))
+	vectores = []
+	total = []
+	for i in range(0,num):
+		vectores.append(creaVector())
+	print(vectores)
+	total = vectores[0]
+	jump = True
+	for i in vectores:
+		if not jump:
+			m = 0
+			for j in i:
+				total[m] -= j
+				m += 1
+		jump = False 
+	print("\n\t El resultado de la resta es: " + str(total))
+
+def producto():
+	print("\n========= PRODUCTO =========")
+	vector = creaVector()
+	escalar = float(input("Ingrese el escalar que multiplicara al vector -->\t"))
+	print("\n\t El producto es: " + str(list(map(lambda n: escalar * n, vector))))
+
+def norma():
+	print("\n========= NORMA =========")
+	vector = creaVector()
+	temp = list(map(lambda n: n ** 2, vector))
+	temp1 = 0
+	for i in temp:
+		temp1 += i
+	print("\n\t La norma es: " + math.sqrt(temp1))
 
 while True:
-	print("\n"
-              "========= Programa encargado de hacer operaciones con vectores =========\n"
+	print("\n========= Programa encargado de hacer operaciones con vectores =========\n"
               "    \t1. Suma\n"
               "    \t2. Resta\n"
               "    \t3. Producto por escalar\n"
@@ -59,13 +94,12 @@ while True:
 		cls()
 	if opcion == 1:		# Suma
 		suma()
-		pass
 	elif opcion == 2:	# Resta
-		pass
+		resta()
 	elif opcion == 3:	# Producto
-		pass
+		producto()
 	elif opcion == 4:	# Norma
-		pass
+		norma()
 	elif opcion == 5:	# Angulo
 		pass
 	elif opcion == 0:
