@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Universidad Nacional Autonoma de Mexico / Facultad de Ingenieria
-# Intelogenica Artificial
+# Inteligenica Artificial
 # Alumnos:
 # Barriga Martínez Diego Alberto
 # Bustamante Carrera Manuel Alejandro
