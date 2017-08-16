@@ -50,8 +50,6 @@ def suma():
 				total[m] += j
 				m += 1
 		jump = False
-	print("\n\tVectores operados:")
-	print(vectores)
 	print("\n\tEl resultado de la suma es: " + str(total))
 
 def resta():
@@ -77,8 +75,6 @@ def resta():
 				total[m] -= j
 				m += 1
 		jump = False
-	print("\n\tVectores operados:")
-	print(vectores)
 	print("\n\tEl resultado de la resta es: " + str(total))
 
 def producto():
@@ -127,8 +123,6 @@ def angulo():
 		j += 1
 	temp1 = round(mod1 * mod2, 2)
 	temp = temp / temp1
-	print("\n\tVectores operados:")
-	print(v1, v2)
 	print("\n\tEl angulo entre los vectores es " + str(math.degrees(math.acos(temp))) + " grados")
 
 # Tanto el programa principal como algunas funciones utilizan excepciones para
