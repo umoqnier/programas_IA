@@ -18,24 +18,23 @@ def cls():					# Funcion para limpiar pantalla en cualquier S.O.
 	else:
 		os.system("clear")
 
-def creaVector():
-	#dim = int(input("Ingresa de que dimension sera el vector -->\t"))
+def creaVector():			# Función que crea un vector de n dimensiones
 	while True:
-		v = input("\nIngrese las componentes del vector separadas por un espacio\n-->\t")
-		v = v.split(" ")
+		v = input("\nIngrese las componentes del vector separadas por una coma\n-->\t")
+		v = v.split(",")
 		try:
 			vector = list(map(lambda n: float(n), v))
-			#print(vector)
-			#print(type(vector))
 			return vector
 		except ValueError:
 			print("\n\t*Error* Ingrese solo valores numericos")
 
 def suma():
+	# La suma se puede realizar entre n vectores y se van sumando una a una
+	# las componentes de cada uno de los vectores, dando como resultado un
+	# vector de las mismas dimensiones que los originales
 	print("\n========= SUMA =========\n")
 	num = int(input("Ingrese cuantos vectores desea sumar -->\t"))
 	vectores = []
-	#total = []
 	for i in range(0,num):
 		vectores.append(creaVector())
 	print(vectores)
@@ -55,6 +54,9 @@ def suma():
 	print("\n\t El resultado de la suma es: " + str(total))
 
 def resta():
+	# La resta de vectores se puede realizar entre n vectores, se van restando
+	# una a una las componentes de cada uno de los vectores, dando como resultado
+	# un vector de las mismas dimensiones que los originales
 	print("\n========= RESTA =========\n")
 	num = int(input("Ingrese cuantos vectores desea restar -->\t"))
 	vectores = []
@@ -78,6 +80,8 @@ def resta():
 	print("\n\t El resultado de la resta es: " + str(total))
 
 def producto():
+	# El producto escalar se calcula multiplicando el escalar por cada uno de los
+	# elementos del vector, el resultado es otro vector
 	print("\n========= PRODUCTO =========")
 	vector = creaVector()
 	while True:
@@ -89,8 +93,10 @@ def producto():
 			print("\n\t*Error* Ingrese solo valores numericos")
 
 def norma(vect):
+	# La norma de un vector se calcula de la siguiente forma:
+	#		norma = ((v1^2) + (v2^2) + (v3^2) + (v4^2) + ...)^(1/2)
+	# y da como resultado un escalar, la magnitud del vector
 	try:
-		#vector = creaVector()
 		temp = list(map(lambda n: n ** 2, vect))
 		temp1 = 0
 		for i in temp:
@@ -101,7 +107,8 @@ def norma(vect):
 		pass
 
 def angulo():
-	# Angulo entre vectores = coseno inverso de ((u * v)/(||u||*||v||))
+	# El ángulo entre vectores se calcula de la siguiente forma:
+	#		angulo = ang_cos ((u * v) / (||u|| * ||v||))
 	print("\n========= ANGULO ENTRE VECTORES =========")
 	v1 = creaVector()
 	v2 = creaVector()
@@ -117,11 +124,12 @@ def angulo():
 		temp += (i * v2[j])
 		j += 1
 	temp1 = round(mod1 * mod2, 2)
-	#print(temp)
-	#print(temp1)
 	temp = temp / temp1
 	print("El angulo entre los vectores es " + str(math.degrees(math.acos(temp))) + " grados")
 
+# Tanto el programa principal como algunas funciones utilizan excepciones para
+# responder adecuadamente en caso de que el usuario no ingrese valores numericos
+# o quiera operar vectores de distintas dimensiones.
 while True:
 	try:
 		print("\n========= Programa encargado de hacer operaciones con vectores n-dimensionales =========\n"
@@ -148,10 +156,9 @@ while True:
 				print("\n\t La norma es: " + str(mod))
 		elif opcion == 5:	# Angulo
 			angulo()
-		elif opcion == 0:
+		elif opcion == 0:	# Salir del programa
 			break
 		else:
 			print("\n\t\tOpcion invalida, intente de nuevo")
-	#creaVector()
 	except ValueError:
 		print("\n\tValor erroneo")
