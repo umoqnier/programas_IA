@@ -37,7 +37,6 @@ def suma():
 	vectores = []
 	for i in range(0,num):
 		vectores.append(creaVector())
-	print(vectores)
 	total = vectores[0]
 	temp = list(filter(lambda n: len(n) == len(total), vectores))
 	if len(temp) != len(vectores):
@@ -50,8 +49,10 @@ def suma():
 			for j in i:
 				total[m] += j
 				m += 1
-		jump = False 
-	print("\n\t El resultado de la suma es: " + str(total))
+		jump = False
+	print("\n\tVectores operados:")
+	print(vectores)
+	print("\n\tEl resultado de la suma es: " + str(total))
 
 def resta():
 	# La resta de vectores se puede realizar entre n vectores, se van restando
@@ -63,7 +64,6 @@ def resta():
 	total = []
 	for i in range(0,num):
 		vectores.append(creaVector())
-	print(vectores)
 	total = vectores[0]
 	temp = list(filter(lambda n: len(n) == len(total), vectores))
 	if len(temp) != len(vectores):
@@ -76,8 +76,10 @@ def resta():
 			for j in i:
 				total[m] -= j
 				m += 1
-		jump = False 
-	print("\n\t El resultado de la resta es: " + str(total))
+		jump = False
+	print("\n\tVectores operados:")
+	print(vectores)
+	print("\n\tEl resultado de la resta es: " + str(total))
 
 def producto():
 	# El producto escalar se calcula multiplicando el escalar por cada uno de los
@@ -87,7 +89,7 @@ def producto():
 	while True:
 		try:
 			escalar = float(input("Ingrese el escalar que multiplicara al vector -->\t"))
-			print("\n\t El producto es: " + str(list(map(lambda n: escalar * n, vector))))
+			print("\n\tEl producto es: " + str(list(map(lambda n: escalar * n, vector))))
 			return 0
 		except ValueError:
 			print("\n\t*Error* Ingrese solo valores numericos")
@@ -125,7 +127,9 @@ def angulo():
 		j += 1
 	temp1 = round(mod1 * mod2, 2)
 	temp = temp / temp1
-	print("El angulo entre los vectores es " + str(math.degrees(math.acos(temp))) + " grados")
+	print("\n\tVectores operados:")
+	print(v1, v2)
+	print("\n\tEl angulo entre los vectores es " + str(math.degrees(math.acos(temp))) + " grados")
 
 # Tanto el programa principal como algunas funciones utilizan excepciones para
 # responder adecuadamente en caso de que el usuario no ingrese valores numericos
