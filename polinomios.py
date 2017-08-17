@@ -1,12 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Universidad Nacional Autonoma de Mexico / Facultad de Ingenieria
-# Inteligenica Artificial
+# Inteligencia Artificial
 # Alumnos:
+# Almazán García Giovanni
 # Barriga Martínez Diego Alberto
 # Bustamante Carrera Manuel Alejandro
 # Juárez Pascual Karla Vanessa
-# Hecho en Python 3.6
+# Hecho en Python 3.5 y utilizando la biblioteca numpy
+
+import numpy as np
 
 
 def crea_polinomio():
@@ -14,44 +17,106 @@ def crea_polinomio():
     grado = int(input("Grado maximo>> "))
     aux = []
     while i <= grado:
-        coeficiente = int(input(("Coeficiente x^" + str(i) + ": ")))
+        coeficiente = int(input(("Coeficiente x**" + str(i) + ": ")))
         aux.append(coeficiente)
         i = i + 1
+    aux.reverse()
     return aux
 
 
-def valor_punto(polinomio):
-    print("==============Valor calculado en un punto==============\n")
-    punto = int(input("Punto>> "))
-    z = 0
-    potencias = []
-    for j in range(0, len(polinomio)):
-        potencias.insert(j, pow(punto, z))
-        z += 1
-    multiplicacion = 0
+def suma(polinomio_1, polinomio_2):
+    p_1 = np.poly1d(polinomio_1)
+    p_2 = np.poly1d(polinomio_2)
+    return p_1 + p_2
 
-    for k in range(0, len(polinomio)):
-        multiplicacion = multiplicacion + (polinomio[k] * potencias[k])
-        k += 1
-    print("Valor>> " + str(multiplicacion))
+
+def resta(polinomio_1, polinomio_2):
+    p_1 = np.poly1d(polinomio_1)
+    p_2 = np.poly1d(polinomio_2)
+    return p_1 - p_2
+
+
+def multiplicacion(polinomio_1, polinomio_2):
+    p_1 = np.poly1d(polinomio_1)
+    p_2 = np.poly1d(polinomio_2)
+    return p_1 * p_2
+
+
+def derivada(polinomio):
+    p = np.poly1d(polinomio)
+    return np.polyder(p)
+
+
+def integral(polinomio):
+    p = np.poly1d(polinomio)
+    return np.polyint(p)
+
+
+def valor_punto(polinomio, punto):
+    p = np.poly1d(polinomio)
+    return p(punto)
 
 
 def operaciones(opcion):
     if opcion == 1:  # Valor en un punto
+        print("==============Valor calculado en un punto==============\n")
+        punto = int(input("Punto>> "))
         polinomio = crea_polinomio()
-        valor_punto(polinomio)
+        print("VALOR>> ", valor_punto(polinomio, punto))
         return True
     elif opcion == 2:  # Suma
-        pass
+        print("==============Suma==============\n")
+        print("Polinomio 1")
+        polinomio_1 = crea_polinomio()
+        print("Polinomio 2")
+        polinomio_2 = crea_polinomio()
+        print("SUMA>> ")
+        print(suma(polinomio_1, polinomio_2))
+        return True
     elif opcion == 3:  # Resta
-        pass
+        print("==============Resta==============\n")
+        print("NOTA: Polinomio 1 - polinomio 2")
+        print("Polinomio 1")
+        polinomio_1 = crea_polinomio()
+        print("Polinomio 2")
+        polinomio_2 = crea_polinomio()
+        print("RESTA>> ")
+        print(resta(polinomio_1, polinomio_2))
+        return True
     elif opcion == 4:  # Multiplicacion
-        pass
+        print("==============Multiplicación==============\n")
+        print("Polinomio 1")
+        polinomio_1 = crea_polinomio()
+        print("Polinomio 2")
+        polinomio_2 = crea_polinomio()
+        print("MULTIPLICACION>> ")
+        print(multiplicacion(polinomio_1, polinomio_2))
+        return True
     elif opcion == 5:  # Derivada
-        pass
+        print("==============Derivada==============\n")
+        polinomio = crea_polinomio()
+        print("DERIVADA>> ")
+        print(derivada(polinomio))
+        return True
     elif opcion == 6:  # Integral
-        pass
+        print("==============Integral==============\n")
+        polinomio = crea_polinomio()
+        print("INTEGRAL>> ")
+        print(integral(polinomio))
+        return True
     elif opcion == 0:
+        print("""\t\t\t\t____________________________________
+                Developed by 
+                -Almazán García Giovanni
+                -Barriga Martínez Diego Alberto
+                -Bustamante Carrera Manuel Alejandro
+                -Juárez Pascual Karla VanessaTeam
+                -------------------------------------
+                \   ^__^
+                 \  (oo)\_______
+                    (__)\       )\/
+                        ||----w |
+                        ||     ||""")
         return False
     else:
         print("*Error* Intenta otra opcion *Error*")
