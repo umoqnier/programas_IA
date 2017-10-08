@@ -13,35 +13,44 @@ from string import ascii_letters
 
 def eval_rec(pa, fp=""):
     data = fp.split()
-    letters = ascii_letters
     operators = ["|", "&", "=>", "<=>", "!"]
     aux = data.pop(0)
-    if fp == "":
-        return pa[aux]
-    elif aux in operators:
+
+    if aux in ascii_letters:  # Si se trata de una variable
+        return pa[aux]  # retorno del valor de la variable diccionario[valor]
+    elif aux in operators:  # Si no es una letra busca en los operadores
+        val_1 = data.pop(0)  # Al menos se necesitará una variable (operadores unarios), opcional dos (operadores binarios)
         if aux == "&":
-            return eval_rec(pa) and eval_rec(pa)
+            val_2 = data.pop(0)
+            return eval_rec(pa, val_1) and eval_rec(pa, val_2)
         elif aux == "|":
-            return eval_rec(pa) or eval_rec(pa)
+            val_2 = data.pop(0)
+            return eval_rec(pa, val_1) or eval_rec(pa, val_2)
         elif aux == "!":
-            return eval_rec(not pa[data.pop(0)])
+            return not eval_rec(pa, val_1)
         elif aux == "=>":
-            return not eval_rec(pa) or eval_rec(pa)
+            val_2 = data.pop(0)
+            return not eval_rec(pa, val_1) or eval_rec(pa, val_2)
         elif aux == "<=>":
-            return (not eval_rec(pa) or eval_rec(pa)) and (not eval_rec(pa) or eval_rec(pa))
+            val_2 = data.pop(0)
+            return (not eval_rec(pa, val_1) or eval_rec(pa, val_2)) and (not eval_rec(pa, val_1) or eval_rec(pa, val_2))
     else:
         fp = " ".join(data)
-        eval_rec(pa, fp)
+        return eval_rec(pa, fp)
 
 
-def tdd(f, fp, pa, r):
-    return f(fp, pa) == r
+def tdd(f, pa, fp, r):
+    return f(pa, fp) == r
 
 
 def main():
     print("  +++++ TDD +++++ ")
     # tdd(evP, fp, e, r)
+    print(tdd(eval_rec, {"p": False, "q": False}, '( | p q )', False))
+    print(tdd(eval_rec, {"p": True, "q": True}, '( & p q )', True))
     print(tdd(eval_rec, {"p": True, "q": False}, '( | p q )', True))
+    print(tdd(eval_rec, {"p": True}, '( ! p )', False))
+    print(tdd(eval_rec, {"p": True, "q": False}, '( => p q )', False))
 
 
 if __name__ == '__main__':
