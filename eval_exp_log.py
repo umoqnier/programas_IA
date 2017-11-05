@@ -12,7 +12,7 @@
 from string import ascii_letters
 
 
-def eval_rec(pa, fp = ""):
+def eval_rec(pa, fp=""):
     data = fp.split()           # Se separa la proposición en carácteres
     operators = ["|", "&", "=>", "<=>", "!"]
     aux = data.pop(0)
@@ -56,6 +56,7 @@ def main():
     print(tdd(eval_rec, {"p": True, "q": False}, '( | p q )', True))
     print(tdd(eval_rec, {"p": True}, '( ! p )', False))
     print(tdd(eval_rec, {"p": True, "q": False}, '( => p q )', False))
+    print(tdd(eval_rec, {"p": False, "q": True}, '( | p ( & q p ) )', False))
 
 
 if __name__ == '__main__':
