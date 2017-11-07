@@ -87,11 +87,33 @@ def selecciona_menor_peso(caminos):
             if peso < aux:
                 aux = peso
                 s_node = sub_n
-    return s_node
+    return s_node, aux
+
+
+def delete_visits(r):
+    for relacion in r:
+        for nodo, peso in zip(relacion.keys(), relacion.values()):
+            if nodo.visitado:
+                r.pop(r.index({nodo: peso}))
+    return r
 
 
 def dikstra(g):
-    pass
+    aux = list()
+    g_relaciones = g.relaciones
+    while g_relaciones:
+        nodo_actual = g.get_actual_node()
+        relaciones = g.relaciones[nodo_actual][:]  # Lista de relaciones del nodo actual
+        relaciones = delete_visits(relaciones)
+        while relaciones:
+            nodo_m, peso = selecciona_menor_peso(relaciones)
+            nodo_m.peso_acumulado = peso
+            nodo_m.antecesor = nodo_actual
+            aux.append(relaciones.pop(relaciones.index({nodo_m: peso})))
+        nodo_n, _ = selecciona_menor_peso(aux)
+        nodo_actual.visitado = True
+        nodo_actual.actual = False
+        nodo_n.actual = True
 
 
 def a_star(g):
