@@ -1,6 +1,6 @@
 % Hechos
 tiene_sintoma(manuel, fiebre).
-tiene_sintoma(alicia, cansancio)
+tiene_sintoma(alicia, cansancio).
 sintoma_de(fiebre, gripe).
 sintoma_de(tos, gripe).
 sintoma_de(cansancio, anemia).
