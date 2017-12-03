@@ -17,7 +17,6 @@ progenitor(luz, paco).
 progenitor(luz, maria).
 
 % Reglas
-
 madre(X, Y):- progenitor(X, Y), mujer(X).
 padre(X, Y):- progenitor(X, Y), hombre(X).
 
@@ -28,3 +27,4 @@ abuela(X, Y):- progenitor(X, Z), progenitor(Z, Y), mujer(X).
 abuelo(X, Y):- progenitor(X, Z), progenitor(Z, Y), hombre(X).
 
 % TAREA:- Definir Hermanos, tios y primos
+hermanos(X, Y):- progenitor(X, Z), progenitor(Y, Z).
