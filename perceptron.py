@@ -9,41 +9,24 @@
 # Juárez Pascual Karla Vanessa
 # Hecho en Python 3.5
 
-#from functools import reduce
-import os
-
-
 def perceptron(muestras, resultados, pesos, taza = 0.1):
-    old_pesos = []
-
-    while old_pesos != pesos:
-        #resultados_iter = iter(resultados)
+    pesosPrev = []
+    while pesosPrev != pesos:
         i = 0
-        old_pesos = pesos[:]
+        pesosPrev = pesos[:]
         for muestra in muestras:
             salida = 0
             temp = list(map(lambda x, y: x * y, pesos, muestra))
-            #print(temp)
             for n in temp:
                 salida += n
-            #resultado = get_resultado_actual(resultados_iter)
             delta = taza * (resultados[i] - g(salida))
-            #print("\n\t", delta)
-            #if delta != 0:
-            pesos = actualiza_pesos(pesos, muestra, delta)
-                #print(pesos)
+            pesos = updatePesos(pesos, muestra, delta)
             i += 1
-        print("\t\t", pesos)
-        #os.system("pause")
+        print("\t\tPesos->\t", pesos)
     return pesos
 
-"""
-def get_resultado_actual(r):
-    return next(r)
-"""
 
-def actualiza_pesos(pesos, muestra, delta):
-    #print("Actualizando pesos")
+def updatePesos(pesos, muestra, delta):
     n_pesos = []
     for m, p in zip(muestra, pesos):
         p = p + m * delta
@@ -52,7 +35,7 @@ def actualiza_pesos(pesos, muestra, delta):
 
 
 def g(pulse):
-    if pulse >= 0:
+    if pulse >= 0:      # Se define el umbral en 0
         return 1
     else:
         return -1
@@ -66,10 +49,11 @@ def main():
                 [1, 1, 1]]
     resultados = [-1, 1, 1, -1]
     taza = 0.1
-    pesos = [0, 0, 0]
+    # Pesos iniciales igual a 0
+    pesosInit = [0, 0, 0]
 
-    resultado = perceptron(muestras, resultados, pesos, taza)
-    print("Final:", resultado)
+    pesosResult = perceptron(muestras, resultados, pesosInit, taza)
+    print("\n\tPesos Finales:\t", pesosResult)
 
 
 if __name__ == '__main__':
