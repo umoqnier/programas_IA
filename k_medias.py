@@ -39,12 +39,15 @@ def obtener_distancias(medias, muestras):
 
 def formar_conjuntos(conjunto_d):
     """ Funcion que forma los conjuntos necesarios tomando la menor distancia """
-    aux = 0
+    elements = []
+    clasificaciones = [[], [], []]  # TODO: Crear lista con listas vacias. Tantas como clasifiaciones tengamos
     tam_dist = len(conjunto_d[0])  # Tamaño del conjunto de distancias
-    for i in range(len(tam_dist)):
-        for j in range(len(conjunto_d[i])):
-            print(conjunto_d[j][i])
-
+    for j in range(tam_dist):
+        for i in range(len(conjunto_d) - 1):
+            elements.append(conjunto_d[i][j])  # Se guarda la columna en una lista
+        menor = min(elements)  # Obtiene el menor de la columna
+        ind = elements.index(menor)  # Obtiene el indice para asignarlo a un conjunto
+        clasificaciones[ind].append(menor)  # Lo asigna a algun conjunto con base en el indice
 
 def main():
     k = 2
