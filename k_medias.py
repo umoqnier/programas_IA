@@ -14,13 +14,16 @@ from math import sqrt
 
 def k_medias(k):
     """ Clasificador por K-medias """
+    bandera = k - 1
     muestras = [[8, 10], [3, 10.5], [7, 13.5], [5, 18], [5, 13],
                 [6, 9], [9, 11], [3, 18], [8.5, 12], [8, 16]]
+    aux_muestras = muestras[:]
     medias_iniciales = [muestras[i] for i in sample(range(0, len(muestras)), k)]
     nuevas_medias = []
+    pre_medias = []
     while medias_iniciales != nuevas_medias:
-        conjunto_distancias = obtener_distancias(medias_iniciales, muestras)  # Lista de distancias por media
-        formar_conjuntos(conjunto_distancias)
+        conjunto_distancias = obtener_distancias(medias_iniciales, muestras)  # Lista de diccionarios {d: punto}
+        c = formar_conjuntos(conjunto_distancias)
 
 
 def obtener_distancias(medias, muestras):
@@ -31,7 +34,7 @@ def obtener_distancias(medias, muestras):
         for muestra in muestras:
             for i in range(len(media) - 1):  # Para vectores de n dimensiones
                 d = sqrt(((muestra[i+1] - media[i+1])**2) + ((muestra[i] - media[i])**2))
-                distancias.append(d)
+                distancias.append({d: muestra})
         conjunto_distancias.append(distancias)
         distancias = []
     return conjunto_distancias
@@ -39,15 +42,19 @@ def obtener_distancias(medias, muestras):
 
 def formar_conjuntos(conjunto_d):
     """ Funcion que forma los conjuntos necesarios tomando la menor distancia """
+    clasificaciones = []  # TODO: Crear lista con listas vacias. Tantas como clasifiaciones tengamos
     elements = []
-    clasificaciones = [[], [], []]  # TODO: Crear lista con listas vacias. Tantas como clasifiaciones tengamos
     tam_dist = len(conjunto_d[0])  # Tamaño del conjunto de distancias
     for j in range(tam_dist):
-        for i in range(len(conjunto_d) - 1):
-            elements.append(conjunto_d[i][j])  # Se guarda la columna en una lista
+        for i in range(len(conjunto_d)):
+            elements.append(conjunto_d[i][j].keys())  # Se guarda la columna en una lista
         menor = min(elements)  # Obtiene el menor de la columna
-        ind = elements.index(menor)  # Obtiene el indice para asignarlo a un conjunto
-        clasificaciones[ind].append(menor)  # Lo asigna a algun conjunto con base en el indice
+        indice = elements.index(menor)  # Obtiene el indice para asignarlo a un conjunto
+        elements = []
+        clasificaciones.append(indice)  # Interesa el indice para obtener los vectores de la clasificacion
+
+    return clasificaciones
+
 
 def main():
     k = 2
