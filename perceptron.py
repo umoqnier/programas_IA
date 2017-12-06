@@ -21,8 +21,7 @@ def perceptron(muestras, resultados, pesos, taza=0.1):
             for n in temp:
                 salida += n
             delta = taza * (resultados[i] - g(salida))
-            if delta != 0:
-                pesos = update_pesos(pesos, muestra, delta)
+            pesos = update_pesos(pesos, muestra, delta)
             i += 1
         print("\t\tPesos->\t", pesos)
     return pesos
@@ -47,18 +46,14 @@ def g(pulse):
 
 def main():
               # x0, x1, x2
+    #resultados = [-1, 1, 1, -1]
     muestras = [[1, 0, 0],
-                [1, 0, 1],
-                [1, 1, 0],
-                [1, 1, 1]]
-    resultados = [-1, 1, 1, -1]
-    # muestras = [[1, 0, 0],
-    #             [1, 0, 1],
-    #             [1, 1, 0],
-    #             [1, 1, 1]]
-    # resultados = [1, 1, 1, -1]
+                 [1, 0, 1],
+                 [1, 1, 0],
+                 [1, 1, 1]]
+    resultados = [1, 1, 1, -1]    
     taza = 0.1
-    pesos_init = [0, 0, 0] # Pesos iniciales igual a 0
+    pesos_init = [0, 0, 0, 0]  # Pesos iniciales igual a 0
 
     pesos_result = perceptron(muestras, resultados, pesos_init, taza)
     print("\n\tPesos Finales:\t", pesos_result)

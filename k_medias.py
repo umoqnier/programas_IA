@@ -18,15 +18,15 @@ def k_medias(k):
     # medias_iniciales = [muestras[i] for i in sample(range(0, len(muestras)), k)] ALEATORIAS
 
     # ========Ejercicio en clase========
-    # muestras = [[8, 10], [3, 10.5], [7, 13.5], [5, 18], [5, 13],
-    #            [6, 9], [9, 11], [3, 18], [8.5, 12], [8, 16]]
-    # medias_iniciales = [[8, 10], [5, 13]]
+    muestras = [[8, 10], [3, 10.5], [7, 13.5], [5, 18], [5, 13],
+               [6, 9], [9, 11], [3, 18], [8.5, 12], [8, 16]]
+    medias_iniciales = [[8, 10], [5, 13]]
 
-    # ========Tarea========
-    muestras = [[1, 12.5], [3, 10.5], [3, 12.5], [3, 14.5], [3, 18],
-                [5, 18], [5, 16], [5, 14.5], [5, 13], [6, 9], [8, 10],
-                [9, 11], [8.5, 12], [7, 13.5], [8, 16], [0.5, 10.5]]
-    medias_iniciales = [[3, 14.5], [9, 11]]
+    #========Tarea========
+    #muestras = [[1, 12.5], [3, 10.5], [3, 12.5], [3, 14.5], [3, 18],
+    #            [5, 18], [5, 16], [5, 14.5], [5, 13], [6, 9], [8, 10],
+    #            [9, 11], [8.5, 12], [7, 13.5], [8, 16], [0.5, 10.5]]
+    #medias_iniciales = [[3, 14.5], [9, 11], [5, 16]]
     while True:
         conjunto_distancias = obtener_distancias(medias_iniciales, muestras)  # Lista de diccionarios {d: punto}
         puntos_clasificados = formar_conjuntos(conjunto_distancias, k)
@@ -107,7 +107,6 @@ def main():
     for puntos in conjuntos_clasificados:
         print("Conjunto:", i+1, "-->", puntos)
         i += 1
-
 
 if __name__ == '__main__':
     main()
